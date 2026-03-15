@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kikoo Club — Where Little Learners Grow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:        #33CC99;
+      --teal-mid:    #2BAF83;
+      --teal-dark:   #1F7A7A;
+      --yellow:      #FFCC00;
+      --yellow-dark: #E6B800;
+      --pink:        #FF3366;
+      --pink-dark:   #CC1144;
+      --purple:      #C084FC;
+      --blue:        #60B4FF;
+      --orange:      #FF8C42;
+      --cream:       #FFFDF0;
+      --white:       #FFFFFF;
+      --ink:         #1A2E2E;
+      --ink-light:   #4A6060;
+      --r-blob:      40% 60% 70% 30% / 40% 50% 60% 50%;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ════════════════════════════════
+       DOTS TEXTURE UTILITY
+    ════════════════════════════════ */
+    .dots {
+      background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+
+    /* ════════════════════════════════
+       NAV
+    ════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 48px;
+      background: rgba(255,253,240,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 2px solid rgba(51,204,153,0.2);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-brand-img {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--teal);
+      box-shadow: 0 3px 10px rgba(51,204,153,0.3);
+    }
+
+    .nav-brand-text {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink-light);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 50px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-link:hover { background: rgba(51,204,153,0.12); color: var(--teal-dark); }
+
+    .nav-btn {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      background: var(--pink);
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 50px;
+      box-shadow: 0 4px 0 var(--pink-dark);
+      transition: transform 0.15s, box-shadow 0.15s;
+      margin-left: 8px;
+    }
+
+    .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--pink-dark); }
+    .nav-btn:active { transform: translateY(1px); box-shadow: 0 2px 0 var(--pink-dark); }
+
+    /* ════════════════════════════════
+       HERO
+    ════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      background: var(--teal-dark);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 120px 48px 80px;
+    }
+
+    /* Scattered floating letters in background */
+    .hero-bg-letter {
+      position: absolute;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      color: rgba(255,255,255,0.06);
+      pointer-events: none;
+      user-select: none;
+      animation: drift linear infinite;
+    }
+
+    @keyframes drift {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
+    }
+
+    /* Blobs */
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      pointer-events: none;
+    }
+
+    .blob-1 {
+      width: 500px; height: 500px;
+      background: rgba(51,204,153,0.25);
+      top: -100px; right: -80px;
+    }
+
+    .blob-2 {
+      width: 300px; height: 300px;
+      background: rgba(255,204,0,0.2);
+      bottom: 60px; right: 200px;
+    }
+
+    .blob-3 {
+      width: 200px; height: 200px;
+      background: rgba(255,51,102,0.2);
+      bottom: -60px; left: 300px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 640px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--yellow);
+      letter-spacing: 0.05em;
+      margin-bottom: 28px;
+      backdrop-filter: blur(4px);
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-pill-dot {
+      width: 7px; height: 7px;
+      background: var(--teal);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.6; }
+    }
+
+    .hero h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(3.2rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--white);
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero h1 .accent-teal { color: var(--teal); }
+    .hero h1 .accent-yellow { color: var(--yellow); }
+
+    .hero-sub {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 40px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-hero-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--teal);
+      color: var(--white);
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 6px 0 var(--teal-mid), 0 12px 30px rgba(51,204,153,0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-hero-primary:hover { transform: translateY(-3px); box-shadow: 0 9px 0 var(--teal-mid), 0 16px 40px rgba(51,204,153,0.45); }
+    .btn-hero-primary:active { transform: translateY(2px); box-shadow: 0 3px 0 var(--teal-mid); }
+
+    .btn-hero-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.1);
+      color: var(--white);
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 16px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(4px);
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+
+    .btn-hero-secondary:hover {
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(255,255,255,0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Hero right: logo + floating elements */
+    .hero-visual {
+      position: absolute;
+      right: 8%;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeUp 0.7s 0.15s ease both;
+    }
+
+    .hero-logo-ring {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 3px dashed rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: spin 30s linear infinite;
+      position: relative;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hero-logo-inner {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 5px solid var(--teal);
+      box-shadow: 0 0 0 10px rgba(51,204,153,0.15), 0 20px 60px rgba(0,0,0,0.4);
+      animation: spin 30s linear infinite reverse, float 4s ease-in-out infinite;
+      position: absolute;
+    }
+
+    .hero-logo-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Ring dots */
+    .ring-dot {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      animation: spin 30s linear infinite reverse;
+    }
+
+    .ring-dot:nth-child(1) { background: var(--yellow); top: -7px; left: calc(50% - 7px); }
+    .ring-dot:nth-child(2) { background: var(--pink); bottom: -7px; left: calc(50% - 7px); }
+    .ring-dot:nth-child(3) { background: var(--blue); left: -7px; top: calc(50% - 7px); }
+    .ring-dot:nth-child(4) { background: var(--orange); right: -7px; top: calc(50% - 7px); }
+
+    /* Stats strip below hero */
+    .hero-stats {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      z-index: 2;
+    }
+
+    .stat-item {
+      padding: 18px 40px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--yellow);
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* ════════════════════════════════
+       WAVE DIVIDER
+    ════════════════════════════════ */
+    .wave-divider {
+      display: block;
+      width: 100%;
+      line-height: 0;
+      overflow: hidden;
+    }
+
+    .wave-divider svg { display: block; width: 100%; }
+
+    /* ════════════════════════════════
+       TOPICS SECTION
+    ════════════════════════════════ */
+    .topics-section {
+      background: var(--cream);
+      padding: 80px 48px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-eyebrow {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .section-title span { color: var(--teal-dark); }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--ink-light);
+      margin-top: 12px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* Bento-style grid */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 18px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .topic-card {
+      border-radius: 28px;
+      padding: 36px 30px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s ease;
+      cursor: default;
+    }
+
+    .topic-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    }
+
+    /* Grid placement for bento layout */
+    .tc-1 { grid-column: 1 / 6; grid-row: 1; background: var(--teal); color: white; }
+    .tc-2 { grid-column: 6 / 9; grid-row: 1; background: var(--yellow); color: var(--ink); }
+    .tc-3 { grid-column: 9 / 13; grid-row: 1; background: var(--ink); color: white; }
+    .tc-4 { grid-column: 1 / 4; grid-row: 2; background: var(--pink); color: white; }
+    .tc-5 { grid-column: 4 / 8; grid-row: 2; background: var(--cream); color: var(--ink); border: 2.5px solid rgba(0,0,0,0.08); }
+    .tc-6 { grid-column: 8 / 13; grid-row: 2; background: var(--teal-dark); color: white; }
+
+    .topic-emoji {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .topic-name {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .topic-desc {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      opacity: 0.85;
+      max-width: 300px;
+    }
+
+    /* Big card decoration */
+    .tc-1 .deco-circle {
+      position: absolute;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      bottom: -40px; right: -40px;
+      pointer-events: none;
+    }
+
+    .tc-6 .deco-circle {
+      position: absolute;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      top: -30px; right: -30px;
+      pointer-events: none;
+    }
+
+    /* ════════════════════════════════
+       AGE SECTION
+    ════════════════════════════════ */
+    .age-section {
+      background: var(--yellow);
+      padding: 80px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .age-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .age-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .age-section .section-eyebrow { color: var(--teal-dark); }
+    .age-section .section-title { color: var(--ink); }
+    .age-section .section-desc { color: rgba(26,46,46,0.7); }
+
+    .age-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .age-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: 0 6px 0 rgba(0,0,0,0.1);
+      transition: transform 0.2s cubic-bezier(.34,1.56,.64,1), box-shadow 0.2s;
+    }
+
+    .age-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 0 rgba(0,0,0,0.1);
+    }
+
+    .age-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .age-range {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .age-label {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--ink);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .age-desc {
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      line-height: 1.5;
+    }
+
+    /* ════════════════════════════════
+       YOUTUBE CTA
+    ════════════════════════════════ */
+    .yt-section {
+      background: var(--teal-dark);
+      padding: 100px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated rings */
+    .yt-rings {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .yt-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.06);
+      animation: expand 8s ease-out infinite;
+    }
+
+    .yt-ring:nth-child(1) { width: 400px; height: 400px; top: 50%; left: 50%; margin: -200px 0 0 -200px; animation-delay: 0s; }
+    .yt-ring:nth-child(2) { width: 600px; height: 600px; top: 50%; left: 50%; margin: -300px 0 0 -300px; animation-delay: 1.5s; }
+    .yt-ring:nth-child(3) { width: 800px; height: 800px; top: 50%; left: 50%; margin: -400px 0 0 -400px; animation-delay: 3s; }
+
+    @keyframes expand {
+      0%   { transform: scale(0.5); opacity: 0; }
+      30%  { opacity: 1; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    .yt-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .yt-play-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #FF0000;
+      box-shadow: 0 8px 0 #990000, 0 20px 50px rgba(255,0,0,0.35);
+      margin-bottom: 32px;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .yt-play-btn:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 12px 0 #990000, 0 28px 60px rgba(255,0,0,0.45);
+    }
+
+    .yt-play-btn svg { margin-left: 6px; }
+
+    .yt-section h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .yt-section h2 em {
+      font-style: normal;
+      color: var(--yellow);
+    }
+
+    .yt-section p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+
+    .btn-yt {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #FF0000;
+      color: var(--white);
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 16px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 6px 0 #990000;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-yt:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #990000; }
+    .btn-yt:active { transform: translateY(1px); box-shadow: 0 2px 0 #990000; }
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    footer {
+      background: var(--ink);
+      padding: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .footer-brand img {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--teal);
+      opacity: 0.9;
+    }
+
+    .footer-brand span {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+
+    .footer-tagline {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.4);
+      font-weight: 600;
+    }
+
+    .footer-yt-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 50px;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .footer-yt-link:hover { color: white; border-color: rgba(255,255,255,0.4); }
+
+    /* ════════════════════════════════
+       ANIMATIONS
+    ════════════════════════════════ */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════ */
+    @media (max-width: 900px) {
+      nav { padding: 14px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 110px 28px 100px; }
+      .hero-visual { display: none; }
+      .topics-section, .age-section, .yt-section { padding: 64px 24px; }
+      .topics-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .tc-1 { grid-column: 1 / 3; }
+      .tc-2 { grid-column: 1 / 2; }
+      .tc-3 { grid-column: 2 / 3; }
+      .tc-4 { grid-column: 1 / 2; }
+      .tc-5 { grid-column: 2 / 3; }
+      .tc-6 { grid-column: 1 / 3; }
+      .age-cards { grid-template-columns: 1fr; max-width: 380px; margin-left: auto; margin-right: auto; }
+      footer { padding: 36px 24px; flex-direction: column; align-items: flex-start; }
+      .hero-stats { display: none; }
+    }
+
+    @media (max-width: 500px) {
+      .hero h1 { font-size: 2.6rem; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .tc-1, .tc-2, .tc-3, .tc-4, .tc-5, .tc-6 { grid-column: 1; grid-row: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="nav-brand" href="#">
+      <img class="nav-brand-img"
+        src="https://i0.wp.com/kidzovo.com/wp-content/uploads/2025/09/1ba670ff-1810-42fc-8631-4ac602232ae8.jpg"
+        alt="Kikoo Club"
+        onerror="this.style.background='#33CC99'"
+      />
+      <span class="nav-brand-text">Kikoo Club</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="#topics">Topics</a>
+      <a class="nav-link" href="#ages">Ages</a>
+      <a class="nav-btn" href="https://www.youtube.com/@Kikooclub" target="_blank" rel="noopener">Watch Free ▶</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero dots">
+    <!-- Ambient blobs -->
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+    <div class="hero-blob blob-3"></div>
+
+    <!-- Floating background letters -->
+    <span class="hero-bg-letter" style="font-size:9rem;left:2%;top:100%;animation-duration:18s;animation-delay:0s;">A</span>
+    <span class="hero-bg-letter" style="font-size:6rem;left:15%;top:100%;animation-duration:22s;animation-delay:3s;">1</span>
+    <span class="hero-bg-letter" style="font-size:11rem;left:30%;top:100%;animation-duration:16s;animation-delay:6s;">B</span>
+    <span class="hero-bg-letter" style="font-size:7rem;left:48%;top:100%;animation-duration:20s;animation-delay:1s;">2</span>
+    <span class="hero-bg-letter" style="font-size:8rem;left:62%;top:100%;animation-duration:14s;animation-delay:9s;">C</span>
+    <span class="hero-bg-letter" style="font-size:5rem;left:78%;top:100%;animation-duration:24s;animation-delay:4s;">3</span>
+
+    <div class="hero-content">
+      <div class="hero-pill">
+        <span class="hero-pill-dot"></span>
+        For Indian Urban Families &nbsp;·&nbsp; Ages 1–6
+      </div>
+      <h1>
+        Where Little<br />
+        <span class="accent-teal">Learners</span><br />
+        <span class="accent-yellow">Come Alive</span>
+      </h1>
+      <p class="hero-sub">
+        Songs, rhymes, letters, numbers — joyful content crafted to help toddlers explore, imagine, and grow.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-hero-primary" href="https://www.youtube.com/@Kikooclub" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          Watch Free Videos
+        </a>
+        <a class="btn-hero-secondary" href="#topics">
+          Explore Topics →
+        </a>
+      </div>
+    </div>
+
+    <!-- Logo visual -->
+    <div class="hero-visual">
+      <div class="hero-logo-ring">
+        <span class="ring-dot"></span>
+        <span class="ring-dot"></span>
+        <span class="ring-dot"></span>
+        <span class="ring-dot"></span>
+        <div class="hero-logo-inner">
+          <img
+            src="https://i0.wp.com/kidzovo.com/wp-content/uploads/2025/09/1ba670ff-1810-42fc-8631-4ac602232ae8.jpg"
+            alt="Kikoo Club"
+            onerror="this.parentElement.style.background='#33CC99'"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">100+</span>
+        <span class="stat-label">Free Videos</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">Ages 1–6</span>
+        <span class="stat-label">Curated Content</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">6</span>
+        <span class="stat-label">Learning Topics</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">🇮🇳 Urban</span>
+        <span class="stat-label">Indian Families</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave -->
+  <div class="wave-divider" style="background:var(--teal-dark);">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#FFFDF0"/>
+    </svg>
+  </div>
+
+  <!-- ── TOPICS ── -->
+  <section class="topics-section" id="topics">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">What We Cover</span>
+      <h2 class="section-title">6 Topics. <span>Infinite Curiosity.</span></h2>
+      <p class="section-desc">Every video is built around a theme that matters to little minds — and their parents.</p>
+    </div>
+
+    <div class="topics-grid">
+      <div class="topic-card tc-1 reveal reveal-delay-1">
+        <span class="topic-emoji">🔤</span>
+        <h3 class="topic-name">Letters & Words</h3>
+        <p class="topic-desc">From A to Z, build vocabulary through songs and stories that stick.</p>
+        <div class="deco-circle"></div>
+      </div>
+      <div class="topic-card tc-2 reveal reveal-delay-2">
+        <span class="topic-emoji">🔢</span>
+        <h3 class="topic-name">Numbers</h3>
+        <p class="topic-desc">Count and discover math through playful rhythms.</p>
+      </div>
+      <div class="topic-card tc-3 reveal reveal-delay-3">
+        <span class="topic-emoji">🎵</span>
+        <h3 class="topic-name">Songs & Rhymes</h3>
+        <p class="topic-desc">Original nursery rhymes that kids can't help but sing along to.</p>
+      </div>
+      <div class="topic-card tc-4 reveal reveal-delay-1">
+        <span class="topic-emoji">💛</span>
+        <h3 class="topic-name">Life Skills</h3>
+        <p class="topic-desc">Kindness, sharing, brushing teeth — big lessons made small.</p>
+      </div>
+      <div class="topic-card tc-5 reveal reveal-delay-2">
+        <span class="topic-emoji">🌍</span>
+        <h3 class="topic-name">The World Around Us</h3>
+        <p class="topic-desc">Animals, nature, seasons, and everyday wonders explored together.</p>
+      </div>
+      <div class="topic-card tc-6 reveal reveal-delay-3">
+        <span class="topic-emoji">🗣️</span>
+        <h3 class="topic-name">Language & Communication</h3>
+        <p class="topic-desc">Build early speaking confidence with vocabulary-rich, warm content.</p>
+        <div class="deco-circle"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave -->
+  <div class="wave-divider" style="background:var(--cream);">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,20 C480,60 960,0 1440,30 L1440,60 L0,60 Z" fill="#FFCC00"/>
+    </svg>
+  </div>
+
+  <!-- ── AGES ── -->
+  <section class="age-section" id="ages">
+    <div class="age-inner">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">Every Stage, Every Child</span>
+        <h2 class="section-title">Made for Ages 1 – 6</h2>
+        <p class="section-desc">Content is thoughtfully matched to each developmental stage.</p>
+      </div>
+      <div class="age-cards">
+        <div class="age-card reveal reveal-delay-1">
+          <span class="age-icon">👶</span>
+          <span class="age-range">1–2</span>
+          <span class="age-label">Babies</span>
+          <p class="age-desc">Simple visuals, gentle sounds, and soothing rhymes to spark first curiosity.</p>
+        </div>
+        <div class="age-card reveal reveal-delay-2">
+          <span class="age-icon">🐣</span>
+          <span class="age-range">2–4</span>
+          <span class="age-label">Toddlers</span>
+          <p class="age-desc">Interactive songs and stories that build language and imagination.</p>
+        </div>
+        <div class="age-card reveal reveal-delay-3">
+          <span class="age-icon">🌱</span>
+          <span class="age-range">4–6</span>
+          <span class="age-label">Preschool</span>
+          <p class="age-desc">Letters, numbers, and life skills to get little ones ready to learn and thrive.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave -->
+  <div class="wave-divider" style="background:var(--yellow);">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 C360,0 1080,60 1440,20 L1440,60 L0,60 Z" fill="#1F7A7A"/>
+    </svg>
+  </div>
+
+  <!-- ── YOUTUBE CTA ── -->
+  <section class="yt-section">
+    <div class="yt-rings">
+      <div class="yt-ring"></div>
+      <div class="yt-ring"></div>
+      <div class="yt-ring"></div>
+    </div>
+    <div class="yt-inner reveal">
+      <a class="yt-play-btn" href="https://www.youtube.com/@Kikooclub" target="_blank" rel="noopener" aria-label="Watch on YouTube">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+      </a>
+      <h2>100+ Free Videos<br />on <em>YouTube</em></h2>
+      <p>No subscriptions. No paywalls. Just bright, joyful learning available to every family — always free.</p>
+      <a class="btn-yt" href="https://www.youtube.com/@Kikooclub" target="_blank" rel="noopener">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+        Open Kikoo Club on YouTube
+      </a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <a class="footer-brand" href="#">
+      <img
+        src="https://i0.wp.com/kidzovo.com/wp-content/uploads/2025/09/1ba670ff-1810-42fc-8631-4ac602232ae8.jpg"
+        alt="Kikoo Club"
+        onerror="this.style.display='none'"
+      />
+      <span>Kikoo Club</span>
+    </a>
+    <span class="footer-tagline">Made with love for curious little learners everywhere 💛</span>
+    <a class="footer-yt-link" href="https://www.youtube.com/@Kikooclub" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+      YouTube Channel
+    </a>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
