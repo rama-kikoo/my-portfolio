@@ -595,6 +595,41 @@
     }
 
     /* ════════════════════════════════
+       LATEST VIDEO
+    ════════════════════════════════ */
+    .latest-video-section {
+      background: var(--cream);
+      padding: 80px 48px;
+    }
+
+    .latest-video-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .video-embed-wrap {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      border: 4px solid var(--teal);
+    }
+
+    .video-embed-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 900px) {
+      .latest-video-section { padding: 64px 24px; }
+    }
+
+    /* ════════════════════════════════
        YOUTUBE CTA
     ════════════════════════════════ */
     .yt-section {
@@ -1008,6 +1043,32 @@
   <div class="wave-divider" style="background:var(--yellow);">
     <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,30 C360,0 1080,60 1440,20 L1440,60 L0,60 Z" fill="#1F7A7A"/>
+    </svg>
+  </div>
+
+  <!-- ── LATEST VIDEO ── -->
+  <section class="latest-video-section">
+    <div class="latest-video-inner">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">Latest from Kikoo Club</span>
+        <h2 class="section-title">Watch Our <span>Newest Video</span></h2>
+      </div>
+      <div class="video-embed-wrap reveal reveal-delay-1">
+        <iframe
+          src="https://www.youtube.com/embed/omD2lUJU-YM"
+          title="Latest Kikoo Club Video"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave -->
+  <div class="wave-divider" style="background:#F4FAF2;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,20 C480,60 960,0 1440,30 L1440,60 L0,60 Z" fill="#1F7A7A"/>
     </svg>
   </div>
 
